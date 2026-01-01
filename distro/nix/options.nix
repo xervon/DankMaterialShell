@@ -30,6 +30,8 @@ in
       extraDescription = "The DankMaterialShell package to use (defaults to be built from source)";
     };
 
+    package = lib.mkPackageOption dmsPkgs "dms-shell" {};
+
     systemd = {
       enable = lib.mkEnableOption "DankMaterialShell systemd startup";
       restartIfChanged = lib.mkOption {
