@@ -568,7 +568,9 @@ func extractHash(data []byte) uint64 {
 
 func (m *Manager) hasSensitiveMimeType(mimes []string) bool {
 	return slices.ContainsFunc(mimes, func(mime string) bool {
-		return slices.Contains(sensitiveMimeTypes, mime)
+		return slices.ContainsFunc(sensitiveMimeTypes, func(sensitive string) bool {
+			return mime == sensitive || strings.HasPrefix(mime, sensitive + "/")
+		})
 	})
 }
 
